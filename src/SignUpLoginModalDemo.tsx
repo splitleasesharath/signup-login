@@ -9,7 +9,7 @@ import { LoginView } from '../components/LoginView';
 import { SignupView } from '../components/SignupView';
 import { PasswordResetView } from '../components/PasswordResetView';
 import { useAuthState } from '../hooks/useAuthState';
-import { useAuthFlowDemo } from './useAuthFlowDemo';
+import { useAuthFlow } from '../hooks/useAuthFlow';
 import { SignUpLoginModalProps } from '../types';
 import * as S from '../SignUpLoginModal.styles';
 
@@ -51,7 +51,7 @@ export const SignUpLoginModal: React.FC<SignUpLoginModalProps> = ({
     resetPassword,
     passwordlessLogin,
     clearError,
-  } = useAuthFlowDemo();
+  } = useAuthFlow();
 
   useEffect(() => {
     if (!isOpen) {
@@ -133,7 +133,7 @@ export const SignUpLoginModal: React.FC<SignUpLoginModalProps> = ({
             onSuccess={onAuthSuccess}
             onSwitchToSignup={showSignup}
             onForgotPassword={showPasswordReset}
-            onPasswordless={showPasswordless}
+            onPasswordless={handlePasswordless}
             onGoBack={showWelcome}
             onLogin={handleLogin}
             loading={loading}
