@@ -175,3 +175,119 @@ export const Link = styled.button`
     padding: 2px 4px;
   }
 `;
+
+// Step Indicator Styles
+export const StepIndicator = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+`;
+
+export const Step = styled.div<{ $active: boolean; $completed: boolean }>`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 200ms ease;
+
+  ${props => props.$completed ? `
+    background: #7C3AED;
+    color: white;
+    border: 2px solid #7C3AED;
+  ` : props.$active ? `
+    background: #7C3AED;
+    color: white;
+    border: 2px solid #7C3AED;
+  ` : `
+    background: white;
+    color: #9CA3AF;
+    border: 2px solid #E5E7EB;
+  `}
+`;
+
+export const StepLine = styled.div<{ $active: boolean }>`
+  width: 60px;
+  height: 2px;
+  background: ${props => props.$active ? '#7C3AED' : '#E5E7EB'};
+  transition: background 200ms ease;
+`;
+
+// Account Type Selection Styles
+export const AccountTypeSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 8px;
+`;
+
+export const Label = styled.label`
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+`;
+
+export const AccountTypeButtons = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export const AccountTypeButton = styled.button<{ $selected: boolean }>`
+  padding: 16px;
+  border-radius: 12px;
+  border: 2px solid ${props => props.$selected ? '#7C3AED' : '#E5E7EB'};
+  background: ${props => props.$selected ? '#F5F3FF' : 'white'};
+  cursor: pointer;
+  transition: all 200ms ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+
+  &:hover {
+    border-color: #7C3AED;
+    background: #F5F3FF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #7C3AED;
+    outline-offset: 2px;
+  }
+`;
+
+export const AccountTypeIcon = styled.div`
+  font-size: 32px;
+`;
+
+export const AccountTypeLabel = styled.div`
+  font-size: 16px;
+  font-weight: 600;
+  color: #1F2937;
+`;
+
+export const AccountTypeDesc = styled.div`
+  font-size: 12px;
+  color: #6B7280;
+`;
+
+export const BackToStep1 = styled.div`
+  text-align: center;
+  margin-top: 8px;
+`;

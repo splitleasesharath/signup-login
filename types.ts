@@ -102,8 +102,9 @@ export interface SignupFormData {
   confirmPassword: string;
   firstName: string;
   lastName: string;
-  birthDate?: Date;
-  userType?: UserType;
+  birthDate: string; // Format: YYYY-MM-DD
+  phoneNumber: string;
+  accountType: 'guest' | 'host';
   referralCode?: string;
 }
 
