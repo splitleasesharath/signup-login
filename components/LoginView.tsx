@@ -13,7 +13,7 @@ export interface LoginViewProps {
   onSuccess?: (user: any) => void;
   onSwitchToSignup: () => void;
   onForgotPassword: () => void;
-  onPasswordless?: () => void;
+  onPasswordless?: (email: string) => Promise<boolean>;
   onGoBack: () => void;
   onLogin: (email: string, password: string) => Promise<any>;
   loading?: boolean;
@@ -33,6 +33,8 @@ export const LoginView: React.FC<LoginViewProps> = ({
 }) => {
   const [email, setEmail] = useState(defaultEmail);
   const [password, setPassword] = useState('');
+  const [magicLinkSent, setMagicLinkSent] = useState(false);
+  const [sendingMagicLink, setSendingMagicLink] = useState(false);
   const { errors, validate, clearError } = useValidation();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -58,6 +60,63 @@ export const LoginView: React.FC<LoginViewProps> = ({
       onSuccess(user);
     }
   };
+
+  const handlePasswordlessClick = async () => {
+    if (!onPasswordless || !email.trim()) return;
+
+    setSendingMagicLink(true);
+    const success = await onPasswordless(email);
+    setSendingMagicLink(false);
+
+    if (success) {
+      setMagicLinkSent(true);
+    }
+  };
+
+  // Show magic link sent confirmation
+  if (magicLinkSent) {
+    return (
+      <S.Container>
+        <S.BackButton onClick={onGoBack} type="button">
+          <S.BackIcon>←</S.BackIcon>
+        </S.BackButton>
+
+        <S.SuccessContainer>
+          <S.SuccessIcon>
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </S.SuccessIcon>
+          <S.SuccessTitle>Check Your Email & Phone</S.SuccessTitle>
+          <S.SuccessText>
+            We've sent a magic login link to:
+          </S.SuccessText>
+          <S.EmailDisplay>{email}</S.EmailDisplay>
+          <S.SuccessNote>
+            If you have a phone number registered with this account, you'll also receive a text message with the login link.
+          </S.SuccessNote>
+          <S.InstructionBox>
+            <S.InstructionIcon>📱</S.InstructionIcon>
+            <S.InstructionText>
+              Click the link in your email or text message to log in instantly - no password needed!
+            </S.InstructionText>
+          </S.InstructionBox>
+          <S.SuccessNote>
+            Didn't receive it? Check your spam folder or try again.
+          </S.SuccessNote>
+          <AuthButton onClick={() => setMagicLinkSent(false)} variant="outline" fullWidth>
+            Send Another Link
+          </AuthButton>
+          <S.BackToLogin>
+            <S.Link onClick={onGoBack} type="button">
+              ← Back to Welcome
+            </S.Link>
+          </S.BackToLogin>
+        </S.SuccessContainer>
+      </S.Container>
+    );
+  }
 
   return (
     <S.Container>
@@ -122,10 +181,11 @@ export const LoginView: React.FC<LoginViewProps> = ({
             </S.Divider>
 
             <AuthButton
-              onClick={onPasswordless}
+              onClick={handlePasswordlessClick}
               variant="outline"
               fullWidth
               type="button"
+              loading={sendingMagicLink}
             >
               Login Without Password
             </AuthButton>

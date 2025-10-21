@@ -153,3 +153,83 @@ export const Link = styled.button`
     padding: 2px 4px;
   }
 `;
+
+// Magic Link Success Screen Styles
+export const SuccessContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 0;
+  text-align: center;
+`;
+
+export const SuccessIcon = styled.div`
+  color: #10B981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+`;
+
+export const SuccessTitle = styled.h2`
+  font-size: 24px;
+  font-weight: 700;
+  color: #1F2937;
+  margin: 0 0 8px 0;
+`;
+
+export const SuccessText = styled.p`
+  font-size: 14px;
+  color: #6B7280;
+  margin: 0;
+  line-height: 1.5;
+`;
+
+export const EmailDisplay = styled.div`
+  font-size: 16px;
+  font-weight: 600;
+  color: #7C3AED;
+  padding: 12px 20px;
+  background: #F5F3FF;
+  border-radius: 8px;
+  border: 1px solid #DDD6FE;
+  margin: 8px 0;
+`;
+
+export const SuccessNote = styled.p`
+  font-size: 13px;
+  color: #9CA3AF;
+  margin: 0;
+  line-height: 1.6;
+  max-width: 400px;
+`;
+
+export const InstructionBox = styled.div`
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+  border: 1px solid #BAE6FD;
+  border-radius: 12px;
+  margin: 8px 0;
+  max-width: 420px;
+`;
+
+export const InstructionIcon = styled.span`
+  font-size: 24px;
+  flex-shrink: 0;
+`;
+
+export const InstructionText = styled.p`
+  font-size: 14px;
+  color: #075985;
+  margin: 0;
+  line-height: 1.6;
+  text-align: left;
+`;
+
+export const BackToLogin = styled.div`
+  text-align: center;
+  margin-top: 16px;
+`;
