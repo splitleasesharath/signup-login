@@ -5,6 +5,7 @@
 
 import React, { useState } from 'react';
 import * as S from './AuthInput.styles';
+import { EyeIcon, EyeOffIcon } from './Icons';
 
 export interface AuthInputProps {
   type: 'email' | 'password' | 'text' | 'date';
@@ -68,9 +69,9 @@ export const AuthInput: React.FC<AuthInputProps> = ({
             tabIndex={-1}
           >
             {showPassword ? (
-              <S.EyeOffIcon />
+              <EyeOffIcon />
             ) : (
-              <S.EyeIcon />
+              <EyeIcon />
             )}
           </S.IconButton>
         )}

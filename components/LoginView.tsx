@@ -113,23 +113,23 @@ export const LoginView: React.FC<LoginViewProps> = ({
           Log In
         </AuthButton>
 
-        {onPasswordless && (
-          <S.Divider>
-            <S.DividerLine />
-            <S.DividerText>or</S.DividerText>
-            <S.DividerLine />
-          </S.Divider>
-        )}
+        {onPasswordless && email.trim() !== '' && (
+          <>
+            <S.Divider>
+              <S.DividerLine />
+              <S.DividerText>or</S.DividerText>
+              <S.DividerLine />
+            </S.Divider>
 
-        {onPasswordless && (
-          <AuthButton
-            onClick={onPasswordless}
-            variant="outline"
-            fullWidth
-            type="button"
-          >
-            Login Without Password
-          </AuthButton>
+            <AuthButton
+              onClick={onPasswordless}
+              variant="outline"
+              fullWidth
+              type="button"
+            >
+              Login Without Password
+            </AuthButton>
+          </>
         )}
 
         <S.SocialButtons>
